@@ -1,0 +1,21 @@
+databases:
+  - name: nexusid-db
+    plan: free
+    databaseName: nexusid
+    user: nexusid
+
+services:
+  - type: web
+    name: nexusid
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: PORT
+        value: "8000"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: nexusid-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
