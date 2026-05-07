@@ -42,5 +42,9 @@ if _os.path.exists(_dist):\n\
         return _FileResponse(_os.path.join(_dist, "index.html"))\n\
 ' >> backend/main.py
 
+# Copy startup script
+COPY start.sh .
+RUN chmod +x start.sh
+
 EXPOSE 8000
-CMD ["gunicorn", "backend.main:app", "--workers", "2", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000", "--timeout", "120"]
+CMD ["./start.sh"]
