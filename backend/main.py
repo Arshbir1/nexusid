@@ -81,6 +81,13 @@ def startup():
         pass
 
 
+@app.get("/health")
+def health_check():
+    """Health check endpoint for UptimeRobot / load balancers."""
+    return {"status": "ok"}
+
+
+
 # ─── Authentication ──────────────────────────────────────────────────────────
 
 def _ensure_users(db: Session):
